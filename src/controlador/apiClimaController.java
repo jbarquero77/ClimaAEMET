@@ -301,7 +301,39 @@ public class apiClimaController implements Initializable {
 	//Metodo para resetear todos los valores de pantalla
 	
 	public void reset() {
-		
+	    // Etiquetas de información general
+	    localidad.setText("");
+	    AMPM.setText("");
+	    hora.setText("");
+	    DIAFECHA.setText("");
+	    tempActual.setText("");
+	    
+	    // Etiquetas de temperatura por hora
+	    tmp1.setText("");
+	    tmp2.setText("");
+	    tmp3.setText("");
+	    tmp4.setText("");
+	    
+	    // Etiquetas de información adicional
+	    TEMMAX.setText("");
+	    TEMMIN.setText("");
+	    VientoDir.setText("");
+	    VientoVel.setText("");
+	    UV.setText("");
+	    HUM.setText("");
+	    porLlu.setText("");
+	    
+	    // Imágenes de estado del clima
+	    clima1.setImage(null);
+	    clima2.setImage(null);
+	    clima3.setImage(null);
+	    clima4.setImage(null);
+	    climaDia.setImage(null);
+	    
+	    // Reiniciar ComboBox
+	    cbMunicipio.getSelectionModel().clearSelection();
+	    cbProvincias.getSelectionModel().clearSelection();
+	    cbIdioma.getSelectionModel().clearSelection();
 	}
 	
 	
