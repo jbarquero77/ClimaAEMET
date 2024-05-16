@@ -1,43 +1,33 @@
 package modelo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import org.w3c.dom.NodeList;
 
-public class PrediccionPrueba {
-	private String fechaElaboracion;
-	private String horaElaboracion;
+public class Prediccion {
+	
+	private String hora;
 	private HashMap<String, String> provincia;
 	private HashMap<String, String> municipio;
 	
-	private List<NodoDia> listaNodosDias;
+	private static List<NodoDia> listaNodosDias;
 
-	public PrediccionPrueba(String fechaElaboracion, String horaElaboracion, HashMap<String, String> provincia,
+	public Prediccion(String hora, HashMap<String, String> provincia,
 			HashMap<String, String> municipio, List<NodoDia> listaNodosDias) {
-		this.fechaElaboracion = fechaElaboracion;
-		this.horaElaboracion = horaElaboracion;
+		this.hora = hora;
 		this.provincia = provincia;
 		this.municipio = municipio;
-		
-		this.listaNodosDias = listaNodosDias;
+		this.listaNodosDias = new ArrayList<>();
 	}
 
-
-	public String getFechaElaboracion() {
-		return fechaElaboracion;
-	}
-
-	public void setFechaElaboracion(String fechaElaboracion) {
-		this.fechaElaboracion = fechaElaboracion;
-	}
-
-	public String getHoraElaboracion() {
-		return horaElaboracion;
+	public String getHora() {
+		return hora;
 	}
 
 	public void setHoraElaboracion(String horaElaboracion) {
-		this.horaElaboracion = horaElaboracion;
+		this.hora= hora;
 	}
 
 	public HashMap<String, String> getProvincia() {
@@ -57,18 +47,8 @@ public class PrediccionPrueba {
 	}
 
 	
-	public List<NodoDia> getListaNodosDias() {
+	public static List<NodoDia> getListaNodosDias() {
 		return listaNodosDias;
-	}
-
-	public void setListaNodosDias(List<NodoDia> listaNodosDias) {
-		this.listaNodosDias = listaNodosDias;
-	}
-
-	@Override
-	public String toString() {
-		return "PrediccionPrueba [fechaElaboracion=" + fechaElaboracion + ", horaElaboracion=" + horaElaboracion
-				+ ", provincia=" + provincia + ", municipio=" + municipio + ", nombreLocalidad=" + ", listaNodosDias=" + listaNodosDias + "]";
 	}
 
 }

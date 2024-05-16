@@ -6,12 +6,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class LeeCSVProvincias {
-	private static HashMap<String, String> provinciasMap;
+	private HashMap<String, String> provinciasMap;
 
 	public LeeCSVProvincias() {
 		provinciasMap = new HashMap<>();
 		cargarDatos();
-
 	}
 
 	public void cargarDatos() {
@@ -24,25 +23,20 @@ public class LeeCSVProvincias {
 			br.readLine();
 			while ((linea = br.readLine()) != null) {
 				String[] partes = linea.split(separador);
-				// CODAUTO, NOMBRE
-
+			// CODAUTO, NOMBRE
 				String cpro = partes[0];
 				String nombre = partes[1];
-
 				// Crear objetos y agregar a los HashMaps correspondientes
 				// Agregar datos directamente a los HashMaps
 				provinciasMap.put(cpro, nombre);
-
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+		
 
-	public static HashMap<String, String> getProvinciasMap() {
-		return new HashMap<>(provinciasMap);
-	}
-	
-	
-
+	public HashMap<String, String> getProvinciasMap() {
+		return this.provinciasMap;
+	}	
 }

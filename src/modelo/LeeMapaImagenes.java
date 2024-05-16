@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 public class LeeMapaImagenes {
 	 private HashMap<String, String> mapaEstadosClima;
@@ -36,16 +37,20 @@ public class LeeMapaImagenes {
 	    }
 
 	    public HashMap<String, String> getWeatherMap() {
-	        return new HashMap<>(mapaEstadosClima);
+	        return this.mapaEstadosClima;
 	    }
 
 	   
 
 	    public static void main(String[] args) {
-	    	LeeMapaImagenes mapper = new LeeMapaImagenes();
-	        HashMap<String, String> mapaEstados = mapper.getWeatherMap();
-	     
-	        // Para verificar el contenido del HashMap
-	        System.out.println(mapaEstados); 
+	    	LeeMapaImagenes lmp = new LeeMapaImagenes();
+	        HashMap<String, String> mapaEstados = lmp.getWeatherMap();
+	        // Iterar sobre el HashMap para obtener clave y valor por separado
+	        for (Entry<String, String> entry : mapaEstados.entrySet()) {
+	            String clave = entry.getKey();
+	            String valor = entry.getValue();
+	            System.out.println("Clave: " + clave + ", Valor: " + valor);
+	        }
 	    }
+	        
 	}

@@ -4,16 +4,16 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 public class LeeCSVMunicipios {
-	//private static HashMap<String, String> provinciasMap;
-	private static HashMap<String, String> municipiosMap;
-	//private static HashMap<String, String> comunidadesAutonomasMap;
+	
+	private HashMap<String, String> municipiosMap;
+	private HashMap<String, String> provinciaMunicipioMap;
+	private String idProvincia;
 
 	public LeeCSVMunicipios() {
-	//	provinciasMap = new HashMap<>();
-		municipiosMap = new HashMap<>();
-		//comunidadesAutonomasMap = new HashMap<>();
+		municipiosMap = new HashMap<>();	
 		cargarDatos();
 	}
 
@@ -28,15 +28,13 @@ public class LeeCSVMunicipios {
 			while ((linea = br.readLine()) != null) {
 				String[] partes = linea.split(separador);
 				//CODAUTO,CPRO,CMUN,DC,NOMBRE
-				//String cpro = partes[1];
+				String cpro = partes[1];
 				String cmun = partes[2];
 				String nombre = partes[4];
 
-				// Crear objetos y agregar a los HashMaps correspondientes
+				
 				// Agregar datos directamente a los HashMaps
-			//	provinciasMap.put(cpro, nombre);
-				municipiosMap.put(cmun, nombre);
-			//	comunidadesAutonomasMap.put(codauto, nombre);
+				municipiosMap.put(cmun, nombre);				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -44,9 +42,19 @@ public class LeeCSVMunicipios {
 	}
 	
 
-	public static HashMap<String, String> getMunicipiosMap() {
-		return new HashMap<>(municipiosMap);
+	public HashMap<String, String> getMunicipiosMap() {
+		return this.municipiosMap;
 	}
 
-	
+	//implementar un metodo que al pasarle un id provincia me modifique el hashmap de municipios y devuelva solo los que pertenecen a esa provincia
+	public HashMap<String, String> getMunicipiosMapByIdProvincia(){
+		for (Entry<String, String> entry : provinciaMunicipioMap.entrySet()) {
+	        String id = entry.getKey();
+	        String nombre = entry.getValue();	        
+			if (id.startsWith(idProvincia)) {
+	            System.out.println(nombre);
+	        }
+	    }
+		return this.provinciaMunicipioMap;
+	}
 }
