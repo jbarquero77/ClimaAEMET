@@ -6,14 +6,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 public class LeeCSVMunicipios {
 	
-	private HashMap<String, String> municipiosMap;
-	private HashMap<String, String> provinciaMunicipioMap;
-	private String idProvincia;
+	private HashMap<String, String> municipiosMap; //para tener todos los municipios del fichero CSV	
 
 	public LeeCSVMunicipios() {
-		municipiosMap = new HashMap<>();	
+		this.municipiosMap = new HashMap<>();	
 		cargarDatos();
 	}
 
@@ -34,7 +35,7 @@ public class LeeCSVMunicipios {
 
 				
 				// Agregar datos directamente a los HashMaps
-				municipiosMap.put(cmun, nombre);				
+				this.municipiosMap.put(cmun, nombre);				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -47,14 +48,29 @@ public class LeeCSVMunicipios {
 	}
 
 	//implementar un metodo que al pasarle un id provincia me modifique el hashmap de municipios y devuelva solo los que pertenecen a esa provincia
-	public HashMap<String, String> getMunicipiosMapByIdProvincia(){
-		for (Entry<String, String> entry : provinciaMunicipioMap.entrySet()) {
+	public ObservableList<String> getMunicipiosMapByIdProvincia(String AIdProvincia){
+		ObservableList<String> resultado = FXCollections.observableArrayList();	
+		for (Entry<String, String> entry : this.municipiosMap.entrySet()) {
 	        String id = entry.getKey();
 	        String nombre = entry.getValue();	        
-			if (id.startsWith(idProvincia)) {
-	            System.out.println(nombre);
+			if (id.startsWith(AIdProvincia)) {
+	            resultado.add(nombre);
 	        }
 	    }
-		return this.provinciaMunicipioMap;
+		return resultado;
+	}
+	
+	public String getKeyOfValue(String municipiosName) {
+		String resultado = "";	
+		for (Entry<String, String> entry : this.municipiosMap.entrySet()) {
+	        String id = entry.getKey();
+	        String nombre = entry.getValue();	        
+			if (nombre.startsWith(municipiosName)) {
+	          resultado = id;
+	          break;  
+	        }
+	    }
+
+		return resultado;
 	}
 }

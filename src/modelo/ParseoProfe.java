@@ -23,12 +23,8 @@ import org.w3c.dom.NodeList;
 public class ParseoProfe {
 	
 	private String rutaXML;
+	private Boolean esCorrectaLectura;
 	
-	public ParseoProfe(String AIdProvincia, String AIdMunicipio) {
-	  this.rutaXML = this.generarRuta(AIdProvincia, AIdMunicipio);
-	  this.aleerDatos();
-	}
-
 	ArrayList<Prediccion> listaPredicciones = new ArrayList<>();
 
 	public void cargarProbabilidadLluvia(Element e) {
@@ -53,6 +49,19 @@ public class ParseoProfe {
 		}
 	}
 
+	public Boolean getEsCorrectaLectura() {
+		return esCorrectaLectura;
+	}
+
+	public void setEsCorrectaLectura(Boolean esCorrectaLectura) {
+		this.esCorrectaLectura = esCorrectaLectura;
+	}
+
+	public ParseoProfe(String AIdProvincia, String AIdMunicipio) {
+	  this.rutaXML = this.generarRuta(AIdProvincia, AIdMunicipio);
+	  this.aleerDatos();
+	}
+	
 	public void cargarEstadoCielo(Element e) {
 
 		NodeList listaCielo = e.getElementsByTagName("estado_cielo");
@@ -240,7 +249,9 @@ public class ParseoProfe {
 				//System.out.println();
 			}
 
+			this.esCorrectaLectura = true;
 		} catch (Exception e) {
+			this.esCorrectaLectura = false;
 			System.out.println("Error en la lectura de datos");
 		}
 	}

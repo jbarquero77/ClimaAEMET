@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 public class LeeCSVProvincias {
 	private HashMap<String, String> provinciasMap;
@@ -38,5 +39,21 @@ public class LeeCSVProvincias {
 
 	public HashMap<String, String> getProvinciasMap() {
 		return this.provinciasMap;
-	}	
+	}
+	
+	public String getKeyOfValue(String provinciaName) {
+		String resultado = "";	
+		for (Entry<String, String> entry : this.provinciasMap.entrySet()) {
+	        String id = entry.getKey();
+	        String nombre = entry.getValue();	        
+			if (nombre.startsWith(provinciaName)) {
+	          resultado = id;
+	          break;  
+	        }
+	    }
+
+		return resultado;
+	}
+	
+	
 }

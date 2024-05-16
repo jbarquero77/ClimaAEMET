@@ -165,9 +165,14 @@ public class apiClimaController implements Initializable {
 	@FXML
 	private void onMousePresedProvincias(ActionEvent event) throws IOException {
 		this.reset();
-		// System.out.println(this.cbProvincias.());
-		// event.getSource()
-		// this.leeMunicipios.getMunicipiosMapByIdProvincia(this.mapaProvincias);
+		
+		String keyProvincia = this.leeProvincias.getKeyOfValue(this.cbProvincias.getValue());
+		if (keyProvincia.trim().isEmpty())
+		  System.out.println("Error : no existe la provincia Key-Value");
+		
+		// falta cambiar el HashMap<String, String> getMunicipiosMapByIdProvincia >> por >> ObservableList<String> getMunicipiosMapByIdProvincia
+		//cbMunicipio.setItems(this.leeMunicipios.getMunicipiosMapByIdProvincia(keyProvincia));
+
 	}
 
 	@FXML
@@ -175,11 +180,22 @@ public class apiClimaController implements Initializable {
 		this.reset();
 		// tindre el idProvincia y el municipio seleccionado del combo
 
-		String idProvincia = "46";
-		String idMunicipio = "029";
-		ParseoProfe predice = new ParseoProfe(idProvincia, idMunicipio);
-		System.out.println(predice);
+		//String keyProvincia = "46";
+		//String keyMunicipio = "029";
+		
+		String keyProvincia = this.leeProvincias.getKeyOfValue(this.cbProvincias.getValue());
+		String keyMunicipio = this.leeMunicipios.getKeyOfValue(this.cbMunicipio.getValue());
+		
+		ParseoProfe predice = new ParseoProfe(keyProvincia, keyMunicipio);
+		if(predice.getEsCorrectaLectura()) {
+			System.out.println(predice);
+			
+			//Cargar el panel de informacion y comenzar el seteo de cada una de la respuesta
+			
+		}
+		
 	}
+
 
 	private HashMap<String, String> mapaProvincias;
 	private HashMap<String, String> mapaMunicipios;
@@ -226,7 +242,7 @@ public class apiClimaController implements Initializable {
 		this.mapaMunicipios = leeMunicipios.getMunicipiosMap();
 
 		// mapaComunidades = new HashMap<>();
-		this.selecMunicipios();
+		//this.selecMunicipios();
 		this.selecProvincias();
 
 		if (prediccionDiaria != null) {
@@ -246,6 +262,9 @@ public class apiClimaController implements Initializable {
 	// Metodo para resetear todos los valores de pantalla
 
 	public void reset() {
+		//Mostrar el panel superpuesto
+		// Con el texto label central <No hay datos que mostrar>
+		
 		// Etiquetas de información general
 		localidad.setText("");
 		hora.setText("");
